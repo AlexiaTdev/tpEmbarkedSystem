@@ -5,17 +5,21 @@
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  led_setup();
+  clock_setup();
   Serial.println("blink");
 }
 
-void led_setup() {
-  //je ne veux pas utiliser les fonctions arduino
-  DDRB |= LED_MASK;
+void clock_setup() {
+  //clock prescaler
+  TCCR1B |= (1<<0)|(1<<2);
+  //mode
+  TCCR1A = OCR1A;
+  //interrupt
+  TIMSK1 =OCIE1A;
 }
 
 void led_toggle(){
-  PORTB ^= LED_MASK;
+  PINB = LED_MASK;
 }
 
 void loop() {
