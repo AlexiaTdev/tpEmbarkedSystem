@@ -11,19 +11,15 @@ void setup() {
 
 void led_setup() {
   //je ne veux pas utiliser les fonctions arduino
-  led_on();
+  DDRB |= LED_MASK;
 }
 
- void led_on(){
-  PORTB |= LED_MASK;
-}
-void led_off(){
-  PORTB &= ~LED_MASK;
+void led_toggle(){
+  PORTB ^= LED_MASK;
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  led_on();
+  led_toggle();
   delay(1000);
-  led_off();
 }
